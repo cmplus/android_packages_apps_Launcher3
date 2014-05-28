@@ -4608,7 +4608,9 @@ public class Launcher extends Activity
     public void clearHotwordRecognition() {
         if (DEBUG_HOTWORD) Log.d(TAG, "clearHotwordRecognition");
 
-        mAudioManager.setStreamMute(MUTE_STREAM, false);
+                    mAudioManager.setStreamMute(MUTE_STREAM, false);
+                }
+   
 
         if (mSpeechRecognizer != null) {
             mSpeechRecognizer.cancel();
