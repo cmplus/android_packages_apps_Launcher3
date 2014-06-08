@@ -4608,7 +4608,16 @@ public class Launcher extends Activity
     public void clearHotwordRecognition() {
         if (DEBUG_HOTWORD) Log.d(TAG, "clearHotwordRecognition");
 
-        mAudioManager.setStreamMute(MUTE_STREAM, false);
+        if (mAudioManager != null) {
+            // Unmute if we're muted, but only after some time to avoid hearing the
+            // beep when opening an app if it's happening
+            mHandler.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    mAudioManager.setStreamMute(MUTE_STREAM, false);
+                }
+            }, 50);
+        }
 
         if (mSpeechRecognizer != null) {
             mSpeechRecognizer.cancel();
